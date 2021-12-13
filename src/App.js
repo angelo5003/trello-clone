@@ -1,7 +1,11 @@
+import Cards from "./components/Card/Cards";
+import Header from "./components/Header/Header";
+
 function App() {
   return (
     <div>
-      <h1>Hello this is the trello clone first commit</h1>
+      <Header />
+      <Cards />
     </div>
   );
 }
