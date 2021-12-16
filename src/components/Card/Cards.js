@@ -1,67 +1,21 @@
 import React, { useState } from "react";
+import Card from "./Card";
 import "./Cards.css";
 
 const Cards = () => {
-  const [title, setTitle] = useState("");
-  const [isEditing, setEditing] = useState(false);
+  const [{ card }, setCard] = useState({ card: [] }); // card state is the variable. We tell React that the state/ variable of card should be an empty array
+  const addCard = () => {
+    // Made a function to add a new card.
+    card.push(<Card />); // when the function is being called the card state and empty array should push the Card component.
+    setCard({ card: [...card] }); // when the btn is clicked, the function of setCard should make an copy of the original array of card and add the card to the array.
 
-  const handleTitle = (event) => {
-    event.preventDefault();
-    setTitle(event.target.value);
+    console.log(card);
   };
 
   return (
-    <div className="card-container">
-      <div className="card-content">
-        <div className="card-info">
-          {isEditing ? null : (
-            <h3 onChange={() => setEditing(!isEditing)}>{title}</h3>
-          )}
-
-          <input
-            type="text"
-            onChange={handleTitle}
-            value={title}
-            placeholder="Enter Title"
-          />
-
-          <button>Add Task</button>
-        </div>
-      </div>
-
-      {/* <div className="card-content">
-        <div className="card-info">
-          {isEditing ? null : (
-            <h3 onChange={() => setEditing(!isEditing)}>{title}</h3>
-          )}
-          <input
-            type="text"
-            onChange={handleTitle}
-            value={title}
-            placeholder="Enter Title"
-          />
-          <p>Some text</p>
-          <p>Some text</p>
-          <button>Add Task</button>
-        </div>
-      </div>
-
-      <div className="card-content">
-        <div className="card-info">
-          {isEditing ? null : (
-            <h3 onChange={() => setEditing(!isEditing)}>{title}</h3>
-          )}
-          <input
-            type="text"
-            onChange={handleTitle}
-            value={title}
-            placeholder="Enter Title"
-          />
-          <p>Some text</p>
-          <p>Some text</p>
-          <button>Add Task</button>
-        </div>
-      </div> */}
+    <div>
+      <button onClick={addCard}>Add Card</button>
+      {card}
     </div>
   );
 };
