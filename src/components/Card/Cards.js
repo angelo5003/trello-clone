@@ -1,22 +1,52 @@
 import React, { useState } from "react";
-import Card from "./Card";
+
 import "./Cards.css";
 
-const Cards = () => {
-  const [{ card }, setCard] = useState({ card: [] }); // card state is the variable. We tell React that the state/ variable of card should be an empty array
-  const addCard = () => {
-    // Made a function to add a new card.
-    card.push(<Card />); // when the function is being called the card state and empty array should push the Card component.
-    setCard({ card: [...card] }); // when the btn is clicked, the function of setCard should make an copy of the original array of card and add the card to the array.
+const newCardArray = [
+  {
+    // Column stuff
+    id: 1,
+    title: "test",
+    inputField: "This is a test h3",
+  },
+];
 
-    console.log(card);
+const Cards = () => {
+  const [addTask, setAddTask] = useState(newCardArray);
+
+  const changeTask = (event) => {
+    event.preventDefault();
+    const updateTasks = [...addTask].map((task) => {
+      return { ...task, inputField: event.target.value };
+    });
+    setAddTask(updateTasks);
+    console.log(addTask);
   };
 
   return (
-    <div>
-      <button onClick={addCard}>Add Card</button>
-      {card}
-    </div>
+    <>
+      <button>Add new Card</button>
+      <div className="card-container">
+        <div className="card-content">
+          <div className="card-info">
+            <ul>
+              {addTask.map((card) => {
+                return (
+                  <li key={card.id}>
+                    <input
+                      type="text"
+                      value={card.inputField}
+                      onChange={changeTask}
+                    />
+                    <button>Add a Task</button>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </>
   );
 };
 
