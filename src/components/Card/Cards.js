@@ -30,7 +30,7 @@ const Cards = () => {
   const addNewTask = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target); // create an empty formData object. We want to use the value of this object.
-    const taskTitle = formData.get("title"); // we use formData variable to use the new object, we use the .get() method with the naming of "title" which we will be using for the input field as a identifier.
+    const taskTitle = formData.get("task"); // we use formData variable to use the new object, we use the .get() method with the naming of "title" which we will be using for the input field as a identifier.
 
     setAddTask([...addTask, { id: addTask.length + 1, inputField: taskTitle }]); // updating our setAddTask, spread(make a copy) the addTask you already have, and add a new one to the trello list. Id is going to our addTask.length and we are incrementing/add by 1. Also the inputField we are getting from our addTask state/array, is equal to the taskTitle from the addNewTask function we're we saying that it needs to the get the form Object with the name of "title".
     console.log(taskTitle);
@@ -47,9 +47,10 @@ const Cards = () => {
             <form onSubmit={addNewTask}>
               <input
                 type="text"
-                name="title"
+                name="task"
                 placeholder="Add a task press enter"
               />
+              <button>Add new Task</button>
             </form>
 
             <ul>
