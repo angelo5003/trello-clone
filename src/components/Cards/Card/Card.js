@@ -1,7 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Cards.css";
 
-const Card = ({ taskTitle, taskInput, handleCardDelete, id }) => {
+const Card = ({
+  taskTitle,
+  taskInput,
+  handleCardDelete,
+  id,
+  handleAddTask,
+}) => {
+  const [name, setName] = useState("");
+
+  const handleChange = (e) => {
+    setName(e.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    handleAddTask(name);
+    setName("");
+  };
+
   return (
     <div className="card-container">
       <div className="card-content">
@@ -14,8 +33,18 @@ const Card = ({ taskTitle, taskInput, handleCardDelete, id }) => {
               id="taskTitle"
               placeholder="Add a title"
             />
-            {/* <input type="text" /> */}
-            <button>Add a Task</button>
+            <form onSubmit={handleSubmit}>
+              <label htmlFor="taskInput">{name}</label>
+              <input
+                type="text"
+                name="text"
+                id="taskInput"
+                value={name}
+                onChange={handleChange}
+                placeholder="Add a Task"
+              />
+              <button type="submit">Add a Task</button>
+            </form>
             <button onClick={() => handleCardDelete(id)}>Delete Card</button>
           </div>
         </div>
